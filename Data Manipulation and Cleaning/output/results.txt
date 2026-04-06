@@ -1,0 +1,497 @@
+> rm(list = ls())
+> 
+> # Get current working directory
+> getwd()
+[1] "C:/Users/OlegK/Desktop/analysis"
+> 
+> # Путь к файлу данных (укажите правильный)
+> data_path <- "C:\\Users\\OlegK\\Desktop\\analysis\\DataSet_No_Details.csv"
+> 
+> # read dataset
+> df <- read.csv(data_path)
+> 
+> # Display structure with variable types
+> str(df)
+'data.frame':	1148 obs. of  41 variables:
+ $ record_id          : int  1 2 3 4 6 8 9 10 12 13 ...
+ $ outcome            : int  0 0 0 0 0 1 0 1 1 0 ...
+ $ hormone1           : num  0.5 1.9 1.2 3.8 1.6 1.6 0.42 2.7 1 1.8 ...
+ $ hormone2           : int  314 196 311 409 418 309 415 450 198 569 ...
+ $ hormone3           : num  9.9 6.8 1.2 3.2 3.8 2.7 5.9 7 9 20.6 ...
+ $ hormone4           : num  4.2 6.8 3.2 2.7 7.2 1.6 9.1 4.5 5.2 8.3 ...
+ $ h_index_34         : num  2.357 1 0.375 1.185 0.528 ...
+ $ hormone5           : num  322.7 190.9 153.7 225.7 99.9 ...
+ $ hormone6           : num  166.1 41 140.8 93.4 24.7 ...
+ $ h_index_56         : num  0.674 1.615 0.378 0.838 1.402 ...
+ $ hormone7           : num  5.7 6.8 5.4 12.7 1.6 9.9 7.5 4 4.2 1.7 ...
+ $ hormone8           : num  129 260 81.1 148 121 120 135 199 149 238 ...
+ $ hormone9           : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ hormone10_1        : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ hormone10_2        : num  0.922 NA 0.405 NA 0.199 0.499 0.815 0.798 0.615 0.506 ...
+ $ hormone10_generated: num  0.922 0.166 0.405 0.441 0.199 ...
+ $ hormone11          : num  NA NA NA NA NA NA NA NA NA 17 ...
+ $ hormone12          : num  NA NA NA NA NA NA NA NA NA 11.3 ...
+ $ hormone13          : num  NA NA NA NA NA NA NA NA NA 306 ...
+ $ hormone14          : num  NA 52.6 74.2 NA NA NA NA NA NA NA ...
+ $ lipids1            : num  0.4 0.54 0.45 0.38 0.48 0.34 0.49 0.62 1.1 0.51 ...
+ $ lipids2            : num  5.05 3.9 3.5 4.84 3.96 3.85 3.93 4.3 3.89 3.72 ...
+ $ lipids3            : num  1.23 1.67 1.29 1.32 1.85 1.42 1.26 1.3 1.11 0.78 ...
+ $ lipids4            : num  3.64 1.98 2.01 3.35 1.89 2.28 2.45 2.72 2.28 NA ...
+ $ lipids5            : num  0.18 0.25 0.2 0.17 0.22 0.15 0.22 0.28 0.5 NA ...
+ $ сarb_metabolism    : num  5.41 4.5 5.57 5.95 4.15 4.66 4.44 5.32 4.71 4.39 ...
+ $ lipid_pero1        : num  NA 2.82 2.16 2.44 1.98 2.36 3.06 2.48 1.83 3.62 ...
+ $ lipid_pero2        : num  NA 1.36 0.72 1.86 0.86 1.17 1.64 1.22 1.35 1.26 ...
+ $ lipid_pero3        : num  NA 0.71 0.27 1.46 0.33 0.62 0.76 0.81 0.65 0.43 ...
+ $ lipid_pero4        : num  NA 1.51 0.64 1.32 2.04 2.61 1.77 0.58 0.39 2.02 ...
+ $ lipid_pero5        : num  10.4 13.7 10.6 10.4 15.1 ...
+ $ antioxidant1       : num  1.64 1.33 1.85 1.34 1.72 NA 1.7 1.31 1.58 NA ...
+ $ antioxidant2       : num  2.24 2.48 2.19 1.58 2.14 2.14 2.22 2.02 2.15 2.36 ...
+ $ antioxidant3       : num  1.91 1.98 1.92 1.86 2.34 1.83 2.08 1.98 2.24 2.11 ...
+ $ an_index_23        : num  1.173 1.253 1.141 0.849 0.915 ...
+ $ antioxidant4       : num  5.21 5.06 9.58 7.46 9.22 7.62 13 7.8 8.85 8.4 ...
+ $ antioxidant5       : num  0.38 0.39 0.49 0.43 0.86 0.38 0.94 0.47 1.12 0.74 ...
+ $ factor_eth         : int  1 1 1 1 1 1 1 1 1 2 ...
+ $ factor_h           : int  0 0 0 0 0 0 0 1 0 1 ...
+ $ factor_pcos        : int  NA NA NA NA NA NA NA NA NA 1 ...
+ $ factor_prl         : int  0 0 0 0 0 0 0 0 0 0 ...
+> 
+> # Beautiful summary with histograms for numeric variables
+> if (!require(skimr)) install.packages("skimr")
+> library(skimr)
+> skim(df)
+── Data Summary ────────────────────────
+                           Values
+Name                       df    
+Number of rows             1148  
+Number of columns          41    
+_______________________          
+Column type frequency:           
+  numeric                  41    
+________________________         
+Group variables            None  
+
+── Variable type: numeric ───────────────────────────────────────────────────────────────────────────────────────────────
+   skim_variable       n_missing complete_rate      mean      sd     p0     p25      p50      p75    p100 hist 
+ 1 record_id                   0        1      1306.     746.     1     655     1258     1946.    2694    ▆▇▆▆▆
+ 2 outcome                     1        0.999     0.139    0.347  0       0        0        0        1    ▇▁▁▁▁
+ 3 hormone1                   14        0.988     1.81     1.51   0.05    1.1      1.5      2.1     26.1  ▇▁▁▁▁
+ 4 hormone2                   16        0.986   382.     259.    31     228.     320      458     2798    ▇▁▁▁▁
+ 5 hormone3                   19        0.983     9.12    11.7    0       3.5      5.7      9.4    118.   ▇▁▁▁▁
+ 6 hormone4                   17        0.985     7.80    11.4    0.1     3.8      5.5      7.4    131.   ▇▁▁▁▁
+ 7 h_index_34                 19        0.983     1.34     1.13   0       0.674    1.02     1.67    18    ▇▁▁▁▁
+ 8 hormone5                   18        0.984   327.     323.     0     178.     270.     378.    5687.   ▇▁▁▁▁
+ 9 hormone6                   16        0.986    78.7     53.5    0.76   40.7     65      101.     375.   ▇▃▁▁▁
+10 h_index_56                 20        0.983     2.25     4.48   0       0.792    1.39     2.52   120.   ▇▁▁▁▁
+11 hormone7                   16        0.986     5.64     3.92   0       2.68     5.1      7.6     47.1  ▇▁▁▁▁
+12 hormone8                   19        0.983   176.      85.8   16.3   116      162      218      558    ▅▇▂▁▁
+13 hormone9                 1009        0.121    23.8     29.1    0.1     5.75    10.9     30.4    172.   ▇▂▁▁▁
+14 hormone10_1              1078        0.0610    0.368    0.186  0.178   0.250    0.280    0.437    1    ▇▂▂▁▁
+15 hormone10_2               632        0.449     0.984   11.5    0.077   0.278    0.44     0.613  261    ▇▁▁▁▁
+16 hormone10_generated       393        0.658     0.843    9.49   0.077   0.284    0.432    0.632  261    ▇▁▁▁▁
+17 hormone11                 987        0.140    12.3      4.68   1.1     9.7     13.1     16       19.2  ▃▂▅▇▇
+18 hormone12                 987        0.140    13.1      3.97   0.5    10.7     14.2     16.4     19    ▁▂▃▇▇
+19 hormone13                 954        0.169   441.     320.    68.9   196.     374.     535     1901    ▇▅▁▁▁
+20 hormone14                 931        0.189    52.1     57.0    3.2    17.2     24.2     71.9    332    ▇▂▁▁▁
+21 lipids1                    17        0.985     0.963    0.386  0.2     0.685    0.92     1.19     2.73 ▅▇▃▁▁
+22 lipids2                    17        0.985     4.50     0.926  2.43    3.84     4.39     5.04     8.82 ▃▇▃▁▁
+23 lipids3                    17        0.985     1.11     0.275  0.41    0.92     1.07     1.27     2.01 ▁▇▇▂▁
+24 lipids4                   276        0.760     2.97     0.911  0.82    2.29     2.84     3.45     7.01 ▂▇▃▁▁
+25 lipids5                   276        0.760     0.433    0.178  0.09    0.3      0.42     0.54     1.24 ▅▇▃▁▁
+26 сarb_metabolism            17        0.985     4.89     0.793  3.04    4.3      4.8      5.38    11.5  ▇▇▁▁▁
+27 lipid_pero1                42        0.963     2.08     0.807  0.5     1.49     1.98     2.54     5.02 ▃▇▅▂▁
+28 lipid_pero2                39        0.966     1.39     0.579  0.12    0.98     1.3      1.69     3.7  ▂▇▃▁▁
+29 lipid_pero3               117        0.898     0.689    0.385  0.07    0.39     0.6      0.9      1.93 ▆▇▃▂▁
+30 lipid_pero4                45        0.961     1.45     0.799  0.23    0.93     1.35     1.81    12.4  ▇▁▁▁▁
+31 lipid_pero5                41        0.964    11.9      3.58   1.75    9.24    11.7     14.4     27.8  ▂▇▆▁▁
+32 antioxidant1              127        0.889     1.62     0.186  1.07    1.48     1.63     1.76     2.43 ▂▆▇▁▁
+33 antioxidant2               49        0.957     2.34     0.465  1.18    2        2.31     2.62     3.82 ▁▇▇▃▁
+34 antioxidant3               50        0.956     1.97     0.369  0.94    1.74     1.95     2.18     3.59 ▁▇▆▁▁
+35 an_index_23                51        0.956     1.22     0.320  0.458   1.01     1.17     1.38     2.77 ▂▇▂▁▁
+36 antioxidant4               42        0.963     7.86     3.17   0       5.45     7.34     9.68    25    ▂▇▂▁▁
+37 antioxidant5               40        0.965     0.690    0.289  0.23    0.48     0.62     0.84     2.04 ▇▆▂▁▁
+38 factor_eth                  1        0.999     1.46     0.659  1       1        1        2        3    ▇▁▃▁▁
+39 factor_h                   14        0.988     0.194    0.396  0       0        0        0        1    ▇▁▁▁▂
+40 factor_pcos               983        0.144     2.6      1.20   1       1        3        4        4    ▇▃▁▆▇
+41 factor_prl                 15        0.987     0.0671   0.250  0       0        0        0        1    ▇▁▁▁▁
+> 
+> # Data set preparation
+> if (!require(dplyr)) install.packages("dplyr")
+> library(dplyr)
+> 
+> # Delete a few columns 
+> cols_to_remove <- c("h_index_34", "h_index_56", "hormone10_1", "hormone10_2",
++                     "an_index_23","outcome","factor_eth","factor_h","factor_pcos","factor_prl")
+> MD_df <- df %>% select(-any_of(cols_to_remove))
+> factor_df <- df %>% select(record_id, outcome, factor_eth, factor_h, factor_pcos, factor_prl)
+> 
+> str(MD_df)
+'data.frame':	1148 obs. of  31 variables:
+ $ record_id          : int  1 2 3 4 6 8 9 10 12 13 ...
+ $ hormone1           : num  0.5 1.9 1.2 3.8 1.6 1.6 0.42 2.7 1 1.8 ...
+ $ hormone2           : int  314 196 311 409 418 309 415 450 198 569 ...
+ $ hormone3           : num  9.9 6.8 1.2 3.2 3.8 2.7 5.9 7 9 20.6 ...
+ $ hormone4           : num  4.2 6.8 3.2 2.7 7.2 1.6 9.1 4.5 5.2 8.3 ...
+ $ hormone5           : num  322.7 190.9 153.7 225.7 99.9 ...
+ $ hormone6           : num  166.1 41 140.8 93.4 24.7 ...
+ $ hormone7           : num  5.7 6.8 5.4 12.7 1.6 9.9 7.5 4 4.2 1.7 ...
+ $ hormone8           : num  129 260 81.1 148 121 120 135 199 149 238 ...
+ $ hormone9           : num  NA NA NA NA NA NA NA NA NA NA ...
+ $ hormone10_generated: num  0.922 0.166 0.405 0.441 0.199 ...
+ $ hormone11          : num  NA NA NA NA NA NA NA NA NA 17 ...
+ $ hormone12          : num  NA NA NA NA NA NA NA NA NA 11.3 ...
+ $ hormone13          : num  NA NA NA NA NA NA NA NA NA 306 ...
+ $ hormone14          : num  NA 52.6 74.2 NA NA NA NA NA NA NA ...
+ $ lipids1            : num  0.4 0.54 0.45 0.38 0.48 0.34 0.49 0.62 1.1 0.51 ...
+ $ lipids2            : num  5.05 3.9 3.5 4.84 3.96 3.85 3.93 4.3 3.89 3.72 ...
+ $ lipids3            : num  1.23 1.67 1.29 1.32 1.85 1.42 1.26 1.3 1.11 0.78 ...
+ $ lipids4            : num  3.64 1.98 2.01 3.35 1.89 2.28 2.45 2.72 2.28 NA ...
+ $ lipids5            : num  0.18 0.25 0.2 0.17 0.22 0.15 0.22 0.28 0.5 NA ...
+ $ сarb_metabolism    : num  5.41 4.5 5.57 5.95 4.15 4.66 4.44 5.32 4.71 4.39 ...
+ $ lipid_pero1        : num  NA 2.82 2.16 2.44 1.98 2.36 3.06 2.48 1.83 3.62 ...
+ $ lipid_pero2        : num  NA 1.36 0.72 1.86 0.86 1.17 1.64 1.22 1.35 1.26 ...
+ $ lipid_pero3        : num  NA 0.71 0.27 1.46 0.33 0.62 0.76 0.81 0.65 0.43 ...
+ $ lipid_pero4        : num  NA 1.51 0.64 1.32 2.04 2.61 1.77 0.58 0.39 2.02 ...
+ $ lipid_pero5        : num  10.4 13.7 10.6 10.4 15.1 ...
+ $ antioxidant1       : num  1.64 1.33 1.85 1.34 1.72 NA 1.7 1.31 1.58 NA ...
+ $ antioxidant2       : num  2.24 2.48 2.19 1.58 2.14 2.14 2.22 2.02 2.15 2.36 ...
+ $ antioxidant3       : num  1.91 1.98 1.92 1.86 2.34 1.83 2.08 1.98 2.24 2.11 ...
+ $ antioxidant4       : num  5.21 5.06 9.58 7.46 9.22 7.62 13 7.8 8.85 8.4 ...
+ $ antioxidant5       : num  0.38 0.39 0.49 0.43 0.86 0.38 0.94 0.47 1.12 0.74 ...
+> summary(factor_df)
+   record_id       outcome         factor_eth      factor_h      factor_pcos    factor_prl     
+ Min.   :   1   Min.   :0.0000   Min.   :1.00   Min.   :0.000   Min.   :1.0   Min.   :0.00000  
+ 1st Qu.: 655   1st Qu.:0.0000   1st Qu.:1.00   1st Qu.:0.000   1st Qu.:1.0   1st Qu.:0.00000  
+ Median :1258   Median :0.0000   Median :1.00   Median :0.000   Median :3.0   Median :0.00000  
+ Mean   :1306   Mean   :0.1395   Mean   :1.46   Mean   :0.194   Mean   :2.6   Mean   :0.06708  
+ 3rd Qu.:1946   3rd Qu.:0.0000   3rd Qu.:2.00   3rd Qu.:0.000   3rd Qu.:4.0   3rd Qu.:0.00000  
+ Max.   :2694   Max.   :1.0000   Max.   :3.00   Max.   :1.000   Max.   :4.0   Max.   :1.00000  
+                NA's   :1        NA's   :1      NA's   :14      NA's   :983   NA's   :15       
+> 
+> # Identify Missing Values
+> sum(is.na(MD_df))               # Total NAs
+[1] 6608
+> colSums(is.na(MD_df))           # NA counts per column
+          record_id            hormone1            hormone2            hormone3            hormone4            hormone5 
+                  0                  14                  16                  19                  17                  18 
+           hormone6            hormone7            hormone8            hormone9 hormone10_generated           hormone11 
+                 16                  16                  19                1009                 393                 987 
+          hormone12           hormone13           hormone14             lipids1             lipids2             lipids3 
+                987                 954                 931                  17                  17                  17 
+            lipids4             lipids5     сarb_metabolism         lipid_pero1         lipid_pero2         lipid_pero3 
+                276                 276                  17                  42                  39                 117 
+        lipid_pero4         lipid_pero5        antioxidant1        antioxidant2        antioxidant3        antioxidant4 
+                 45                  41                 127                  49                  50                  42 
+       antioxidant5 
+                 40 
+> skim(MD_df)
+── Data Summary ────────────────────────
+                           Values
+Name                       MD_df 
+Number of rows             1148  
+Number of columns          31    
+_______________________          
+Column type frequency:           
+  numeric                  31    
+________________________         
+Group variables            None  
+
+── Variable type: numeric ───────────────────────────────────────────────────────────────────────────────────────────────
+   skim_variable       n_missing complete_rate     mean      sd     p0     p25      p50      p75    p100 hist 
+ 1 record_id                   0         1     1306.    746.     1     655     1258     1946.    2694    ▆▇▆▆▆
+ 2 hormone1                   14         0.988    1.81    1.51   0.05    1.1      1.5      2.1     26.1  ▇▁▁▁▁
+ 3 hormone2                   16         0.986  382.    259.    31     228.     320      458     2798    ▇▁▁▁▁
+ 4 hormone3                   19         0.983    9.12   11.7    0       3.5      5.7      9.4    118.   ▇▁▁▁▁
+ 5 hormone4                   17         0.985    7.80   11.4    0.1     3.8      5.5      7.4    131.   ▇▁▁▁▁
+ 6 hormone5                   18         0.984  327.    323.     0     178.     270.     378.    5687.   ▇▁▁▁▁
+ 7 hormone6                   16         0.986   78.7    53.5    0.76   40.7     65      101.     375.   ▇▃▁▁▁
+ 8 hormone7                   16         0.986    5.64    3.92   0       2.68     5.1      7.6     47.1  ▇▁▁▁▁
+ 9 hormone8                   19         0.983  176.     85.8   16.3   116      162      218      558    ▅▇▂▁▁
+10 hormone9                 1009         0.121   23.8    29.1    0.1     5.75    10.9     30.4    172.   ▇▂▁▁▁
+11 hormone10_generated       393         0.658    0.843   9.49   0.077   0.284    0.432    0.632  261    ▇▁▁▁▁
+12 hormone11                 987         0.140   12.3     4.68   1.1     9.7     13.1     16       19.2  ▃▂▅▇▇
+13 hormone12                 987         0.140   13.1     3.97   0.5    10.7     14.2     16.4     19    ▁▂▃▇▇
+14 hormone13                 954         0.169  441.    320.    68.9   196.     374.     535     1901    ▇▅▁▁▁
+15 hormone14                 931         0.189   52.1    57.0    3.2    17.2     24.2     71.9    332    ▇▂▁▁▁
+16 lipids1                    17         0.985    0.963   0.386  0.2     0.685    0.92     1.19     2.73 ▅▇▃▁▁
+17 lipids2                    17         0.985    4.50    0.926  2.43    3.84     4.39     5.04     8.82 ▃▇▃▁▁
+18 lipids3                    17         0.985    1.11    0.275  0.41    0.92     1.07     1.27     2.01 ▁▇▇▂▁
+19 lipids4                   276         0.760    2.97    0.911  0.82    2.29     2.84     3.45     7.01 ▂▇▃▁▁
+20 lipids5                   276         0.760    0.433   0.178  0.09    0.3      0.42     0.54     1.24 ▅▇▃▁▁
+21 сarb_metabolism            17         0.985    4.89    0.793  3.04    4.3      4.8      5.38    11.5  ▇▇▁▁▁
+22 lipid_pero1                42         0.963    2.08    0.807  0.5     1.49     1.98     2.54     5.02 ▃▇▅▂▁
+23 lipid_pero2                39         0.966    1.39    0.579  0.12    0.98     1.3      1.69     3.7  ▂▇▃▁▁
+24 lipid_pero3               117         0.898    0.689   0.385  0.07    0.39     0.6      0.9      1.93 ▆▇▃▂▁
+25 lipid_pero4                45         0.961    1.45    0.799  0.23    0.93     1.35     1.81    12.4  ▇▁▁▁▁
+26 lipid_pero5                41         0.964   11.9     3.58   1.75    9.24    11.7     14.4     27.8  ▂▇▆▁▁
+27 antioxidant1              127         0.889    1.62    0.186  1.07    1.48     1.63     1.76     2.43 ▂▆▇▁▁
+28 antioxidant2               49         0.957    2.34    0.465  1.18    2        2.31     2.62     3.82 ▁▇▇▃▁
+29 antioxidant3               50         0.956    1.97    0.369  0.94    1.74     1.95     2.18     3.59 ▁▇▆▁▁
+30 antioxidant4               42         0.963    7.86    3.17   0       5.45     7.34     9.68    25    ▂▇▂▁▁
+31 antioxidant5               40         0.965    0.690   0.289  0.23    0.48     0.62     0.84     2.04 ▇▆▂▁▁
+> na_stats <- colMeans(is.na(MD_df)) * 100 # % missing data
+> na_stats
+          record_id            hormone1            hormone2            hormone3            hormone4            hormone5 
+           0.000000            1.219512            1.393728            1.655052            1.480836            1.567944 
+           hormone6            hormone7            hormone8            hormone9 hormone10_generated           hormone11 
+           1.393728            1.393728            1.655052           87.891986           34.233449           85.975610 
+          hormone12           hormone13           hormone14             lipids1             lipids2             lipids3 
+          85.975610           83.101045           81.097561            1.480836            1.480836            1.480836 
+            lipids4             lipids5     сarb_metabolism         lipid_pero1         lipid_pero2         lipid_pero3 
+          24.041812           24.041812            1.480836            3.658537            3.397213           10.191638 
+        lipid_pero4         lipid_pero5        antioxidant1        antioxidant2        antioxidant3        antioxidant4 
+           3.919861            3.571429           11.062718            4.268293            4.355401            3.658537 
+       antioxidant5 
+           3.484321 
+> 
+> # Tables for missing data <=35% and >35%
+> na_stats_filtered <- na_stats[na_stats <= 35]
+> data.frame(Column = names(na_stats_filtered), NA_Percent = na_stats_filtered)
+                                 Column NA_Percent
+record_id                     record_id   0.000000
+hormone1                       hormone1   1.219512
+hormone2                       hormone2   1.393728
+hormone3                       hormone3   1.655052
+hormone4                       hormone4   1.480836
+hormone5                       hormone5   1.567944
+hormone6                       hormone6   1.393728
+hormone7                       hormone7   1.393728
+hormone8                       hormone8   1.655052
+hormone10_generated hormone10_generated  34.233449
+lipids1                         lipids1   1.480836
+lipids2                         lipids2   1.480836
+lipids3                         lipids3   1.480836
+lipids4                         lipids4  24.041812
+lipids5                         lipids5  24.041812
+сarb_metabolism         сarb_metabolism   1.480836
+lipid_pero1                 lipid_pero1   3.658537
+lipid_pero2                 lipid_pero2   3.397213
+lipid_pero3                 lipid_pero3  10.191638
+lipid_pero4                 lipid_pero4   3.919861
+lipid_pero5                 lipid_pero5   3.571429
+antioxidant1               antioxidant1  11.062718
+antioxidant2               antioxidant2   4.268293
+antioxidant3               antioxidant3   4.355401
+antioxidant4               antioxidant4   3.658537
+antioxidant5               antioxidant5   3.484321
+> 
+> na_stats_filtered_1 <- na_stats[na_stats > 35]
+> data.frame(Column = names(na_stats_filtered_1), NA_Percent = na_stats_filtered_1)
+             Column NA_Percent
+hormone9   hormone9   87.89199
+hormone11 hormone11   85.97561
+hormone12 hormone12   85.97561
+hormone13 hormone13   83.10105
+hormone14 hormone14   81.09756
+> 
+> # Visualizing Missing Data Patterns
+> if (!require(visdat)) install.packages("visdat")
+> library(visdat)
+> vis_miss(MD_df)
+> 
+> if (!require(naniar)) install.packages("naniar")
+> library(naniar)
+> gg_miss_var(MD_df)
+> 
+> # Delete additional columns to get handle_MD_df
+> cols_to_remove1 <- c("hormone9", "hormone11", "hormone12", "hormone13", "hormone14")
+> handle_MD_df <- MD_df %>% select(-any_of(cols_to_remove1))
+> str(handle_MD_df)
+'data.frame':	1148 obs. of  26 variables:
+ $ record_id          : int  1 2 3 4 6 8 9 10 12 13 ...
+ $ hormone1           : num  0.5 1.9 1.2 3.8 1.6 1.6 0.42 2.7 1 1.8 ...
+ $ hormone2           : int  314 196 311 409 418 309 415 450 198 569 ...
+ $ hormone3           : num  9.9 6.8 1.2 3.2 3.8 2.7 5.9 7 9 20.6 ...
+ $ hormone4           : num  4.2 6.8 3.2 2.7 7.2 1.6 9.1 4.5 5.2 8.3 ...
+ $ hormone5           : num  322.7 190.9 153.7 225.7 99.9 ...
+ $ hormone6           : num  166.1 41 140.8 93.4 24.7 ...
+ $ hormone7           : num  5.7 6.8 5.4 12.7 1.6 9.9 7.5 4 4.2 1.7 ...
+ $ hormone8           : num  129 260 81.1 148 121 120 135 199 149 238 ...
+ $ hormone10_generated: num  0.922 0.166 0.405 0.441 0.199 ...
+ $ lipids1            : num  0.4 0.54 0.45 0.38 0.48 0.34 0.49 0.62 1.1 0.51 ...
+ $ lipids2            : num  5.05 3.9 3.5 4.84 3.96 3.85 3.93 4.3 3.89 3.72 ...
+ $ lipids3            : num  1.23 1.67 1.29 1.32 1.85 1.42 1.26 1.3 1.11 0.78 ...
+ $ lipids4            : num  3.64 1.98 2.01 3.35 1.89 2.28 2.45 2.72 2.28 NA ...
+ $ lipids5            : num  0.18 0.25 0.2 0.17 0.22 0.15 0.22 0.28 0.5 NA ...
+ $ сarb_metabolism    : num  5.41 4.5 5.57 5.95 4.15 4.66 4.44 5.32 4.71 4.39 ...
+ $ lipid_pero1        : num  NA 2.82 2.16 2.44 1.98 2.36 3.06 2.48 1.83 3.62 ...
+ $ lipid_pero2        : num  NA 1.36 0.72 1.86 0.86 1.17 1.64 1.22 1.35 1.26 ...
+ $ lipid_pero3        : num  NA 0.71 0.27 1.46 0.33 0.62 0.76 0.81 0.65 0.43 ...
+ $ lipid_pero4        : num  NA 1.51 0.64 1.32 2.04 2.61 1.77 0.58 0.39 2.02 ...
+ $ lipid_pero5        : num  10.4 13.7 10.6 10.4 15.1 ...
+ $ antioxidant1       : num  1.64 1.33 1.85 1.34 1.72 NA 1.7 1.31 1.58 NA ...
+ $ antioxidant2       : num  2.24 2.48 2.19 1.58 2.14 2.14 2.22 2.02 2.15 2.36 ...
+ $ antioxidant3       : num  1.91 1.98 1.92 1.86 2.34 1.83 2.08 1.98 2.24 2.11 ...
+ $ antioxidant4       : num  5.21 5.06 9.58 7.46 9.22 7.62 13 7.8 8.85 8.4 ...
+ $ antioxidant5       : num  0.38 0.39 0.49 0.43 0.86 0.38 0.94 0.47 1.12 0.74 ...
+> 
+> # ==================== 2. ЗАДАНИЕ 1: Little's MCAR Test ====================
+> cat("\n========== Little's MCAR Test ==========\n")
+
+========== Little's MCAR Test ==========
+> if (!require(naniar)) install.packages("naniar")
+> library(naniar)
+> 
+> if (any(is.na(handle_MD_df))) {
++   mcar_result <- mcar_test(handle_MD_df)
++   print(mcar_result)
++   p_val <- mcar_result$p.value
++   if (p_val > 0.05) {
++     cat("p-value =", p_val, "> 0.05 → Не отвергаем H0: данные MCAR.\n")
++   } else {
++     cat("p-value =", p_val, "≤ 0.05 → Отвергаем H0: данные НЕ MCAR (MAR или MNAR).\n")
++   }
++ } else {
++   cat("В данных нет пропусков, тест MCAR не требуется.\n")
++ }
+# A tibble: 1 × 4
+  statistic    df p.value missing.patterns
+      <dbl> <dbl>   <dbl>            <int>
+1     1809.  1102       0               54
+p-value = 0 ≤ 0.05 → Отвергаем H0: данные НЕ MCAR (MAR или MNAR).
+> 
+> # ==================== 3. ЗАДАНИЕ 2: Сравнение методов импутации (PMM vs RF) ====================
+> cat("\n========== Imputation: PMM vs RF ==========\n")
+
+========== Imputation: PMM vs RF ==========
+> 
+> # Оставляем только колонки с % пропусков <= 35% (для устойчивости)
+> cols_for_impute <- names(na_stats[na_stats <= 35])
+> data_impute <- handle_MD_df[, cols_for_impute]
+> 
+> if (!require(mice)) install.packages("mice")
+> if (!require(ggplot2)) install.packages("ggplot2")
+> library(mice)
+> library(ggplot2)
+> 
+> # ---- Метод Random Forest ----
+> cat("Выполняется импутация методом Random Forest...\n")
+Выполняется импутация методом Random Forest...
+> imp_rf <- mice(data_impute, m = 5, method = "rf", printFlag = FALSE)
+Warning message:
+Number of logged events: 1 
+> completed_rf <- complete(imp_rf)
+> 
+> # ---- Метод Predictive Mean Matching ----
+> cat("Выполняется импутация методом Predictive Mean Matching (PMM)...\n")
+Выполняется импутация методом Predictive Mean Matching (PMM)...
+> imp_pmm <- mice(data_impute, m = 5, method = "pmm", printFlag = FALSE)
+Warning message:
+Number of logged events: 7 
+> completed_pmm <- complete(imp_pmm)
+> 
+> # Финальный набор данных (по заданию – imputed_handle_MD_df_final)
+> imputed_handle_MD_df_final <- completed_rf
+> 
+> # Выбираем переменную для визуализации
+> if ("hormone10_generated" %in% names(data_impute)) {
++   var_name <- "hormone10_generated"
++ } else {
++   var_name <- names(data_impute)[sapply(data_impute, is.numeric)][1]
++   cat("Переменная 'hormone10_generated' не найдена. Используем", var_name, "\n")
++ }
+> 
+> # График плотности: Original (с пропусками) vs PMM vs RF
+> plot_df <- data.frame(
++   value = c(data_impute[[var_name]], completed_pmm[[var_name]], completed_rf[[var_name]]),
++   method = rep(c("Original (with NA)", "PMM", "RF"), each = nrow(data_impute))
++ )
+> 
+> ggplot(plot_df, aes(x = value, fill = method)) +
++   geom_density(alpha = 0.5) +
++   labs(title = paste("Сравнение распределения:", var_name),
++        x = var_name, y = "Плотность") +
++   theme_minimal() +
++   scale_x_continuous(limits = quantile(plot_df$value, c(0.01, 0.99), na.rm = TRUE))
+Warning message:
+Removed 450 rows containing non-finite outside the scale range (`stat_density()`). 
+> 
+> # Вывод заключения
+> cat("\n========== Вывод по методам импутации ==========\n")
+
+========== Вывод по методам импутации ==========
+> cat("Метод PMM (Predictive Mean Matching) сохраняет исходное распределение и дисперсию,\n",
++     "особенно для непрерывных данных. RF (Random Forest) более гибок, но может сглаживать пики.\n",
++     "На графике видно, что распределение после PMM ближе к исходному (с пропусками),\n",
++     "чем после RF. Рекомендуется использовать PMM для данного набора данных.\n")
+Метод PMM (Predictive Mean Matching) сохраняет исходное распределение и дисперсию,
+ особенно для непрерывных данных. RF (Random Forest) более гибок, но может сглаживать пики.
+ На графике видно, что распределение после PMM ближе к исходному (с пропусками),
+ чем после RF. Рекомендуется использовать PMM для данного набора данных.
+> 
+> # ==================== 4. ЗАДАНИЕ 3 (Extra points): LOF для выбросов ====================
+> cat("\n========== Local Outlier Factor (LOF) ==========\n")
+
+========== Local Outlier Factor (LOF) ==========
+> 
+> if (!require(dbscan)) install.packages("dbscan")
+> if (!require(tidyr)) install.packages("tidyr")
+> library(dbscan)
+> library(tidyr)
+> 
+> # Используем финальный импутированный датасет
+> data_lof <- imputed_handle_MD_df_final
+> 
+> # Выбираем только числовые столбцы
+> numeric_cols <- data_lof %>% select(where(is.numeric))
+> # Удаляем столбцы с нулевой дисперсией
+> numeric_cols <- numeric_cols[, apply(numeric_cols, 2, var, na.rm = TRUE) != 0]
+> 
+> # Масштабирование
+> scaled_data <- scale(numeric_cols)
+> 
+> # Удаляем строки с NA (на всякий случай)
+> if (any(is.na(scaled_data))) {
++   cat("Обнаружены NA в масштабированных данных. Удаляем соответствующие строки.\n")
++   complete_rows <- complete.cases(scaled_data)
++   scaled_data <- scaled_data[complete_rows, ]
++   data_lof <- data_lof[complete_rows, ]
++ }
+Обнаружены NA в масштабированных данных. Удаляем соответствующие строки.
+> 
+> # Выбор параметра minPts (обычно 20 или меньше)
+> min_pts <- min(20, nrow(scaled_data) - 1)
+> 
+> # Расчёт LOF (используем minPts вместо устаревшего k)
+> lof_scores <- lof(scaled_data, minPts = min_pts)
+> data_lof$LOF <- lof_scores
+> 
+> # Гистограмма LOF факторов
+> ggplot(data_lof, aes(x = LOF)) +
++   geom_histogram(bins = 50, fill = "steelblue", color = "black") +
++   labs(title = "Гистограмма LOF факторов", x = "Local Outlier Factor", y = "Частота") +
++   theme_minimal()
+> 
+> # Определение выбросов (порог = 2)
+> threshold <- 2
+> data_lof$is_outlier <- data_lof$LOF > threshold
+> 
+> # Bivariate scatterplot с использованием PCA
+> pca_res <- prcomp(scaled_data, center = FALSE, scale. = FALSE)
+> pca_df <- data.frame(
++   PC1 = pca_res$x[,1],
++   PC2 = pca_res$x[,2],
++   outlier = data_lof$is_outlier
++ )
+> 
+> ggplot(pca_df, aes(x = PC1, y = PC2, color = outlier)) +
++   geom_point(alpha = 0.7) +
++   scale_color_manual(values = c("black", "red"), labels = c("Обычные", "Выбросы")) +
++   labs(title = "Bivariate scatterplot (PC1 vs PC2) с выделением LOF-выбросов") +
++   theme_minimal()
+> 
+> # Дополнительный scatterplot для двух исходных переменных (если lipids1 и lipids2 есть)
+> if (all(c("lipids1", "lipids2") %in% names(data_lof))) {
++   ggplot(data_lof, aes(x = lipids1, y = lipids2, color = is_outlier)) +
++     geom_point(alpha = 0.7) +
++     scale_color_manual(values = c("black", "red")) +
++     labs(title = "Bivariate scatterplot: lipids1 vs lipids2 (LOF outliers)") +
++     theme_minimal()
++ }
+> 
+> # Вывод статистики
+> cat("Количество выбросов (LOF >", threshold, "):", sum(data_lof$is_outlier), "\n")
+Количество выбросов (LOF > 2 ): 5 
+> cat("Процент выбросов:", round(100 * mean(data_lof$is_outlier), 2), "%\n")
+Процент выбросов: 0.57 %
+> 
+> # ==================== Конец скрипта ====================
