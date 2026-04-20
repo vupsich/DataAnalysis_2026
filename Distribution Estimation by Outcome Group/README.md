@@ -110,7 +110,7 @@ The **exponential distribution** did **not** appear as the best model for any va
 | File | Description |
 |---|---|
 | `data_for_analysis.csv` | Original dataset |
-| `analysis_script.R` | R script performing all data processing, distribution fitting, and export |
+| `HW2.R` | R script performing all data processing, distribution fitting, and export |
 | `descriptive_stats_main.csv` | Summary table for the main assignment (without `lipids5`) |
 | `descriptive_stats_extra.csv` | Summary table for the extra‑points assignment (with imputed `lipids5`) |
 | `README.md` | This document |
