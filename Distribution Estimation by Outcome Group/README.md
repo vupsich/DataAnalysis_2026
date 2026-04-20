@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| **Name** | [Oleg Kudryashov] |
+| **Name** | Oleg Kudryashov |
 | **Date** | 19.04.2026 |
 | **Course** | Data Analysis 2026 |
-| **Group** | Subgroup 2 (ЦТм-25-1) |
+| **Group** | Subgroup 2 (ЦТм-25-2) |
 
 ## 3. Data Description
 
